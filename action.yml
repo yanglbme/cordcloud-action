@@ -1,0 +1,23 @@
+name: 'CordCloud Action'
+description: 'GitHub Action for CordCloud'
+author: 'yanglbme'
+branding:
+  icon: 'arrow-right-circle'
+  color: 'gray-dark'
+inputs:
+  username:
+    description: 'your cordcloud username'
+    required: true
+  passwd:
+    description: 'your cordcloud password'
+    required: true
+  host:
+    description: 'base host'
+    required: false
+    default: 'cordcloud.biz'
+outputs:
+  result:
+    description: 'The result of api'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
