@@ -1,0 +1,19 @@
+name: Sync
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.repository == 'yanglbme/cordcloud-action'
+    steps:
+      - name: Sync to gitee.com
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.RSA_PRIVATE_KEY }}
+        with:
+          source-repo: git@github.com:yanglbme/cordcloud-action.git
+          destination-repo: git@gitee.com:yanglbme/cordcloud-action.git

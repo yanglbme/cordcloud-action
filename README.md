@@ -35,7 +35,10 @@ jobs:
           host: cordcloud.site
 ```
 
-同时，在项目的 `Settings -> Secrets` 路径下配置好 `CC_EMAIL` 与 `CC_PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号密码等敏感信息。
+同时，在 GitHub 仓库的 `Settings -> Secrets` 路径下配置好 `CC_EMAIL` 与 `CC_PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号密码等敏感信息。
+
+
+![](./images/add_secrets.png)
 
 注意：cron 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。由于 GitHub Actions 的限制，如果将 cron 设置为 `* * * * *`，则实际的执行频率为每 5 分钟执行一次。
 
