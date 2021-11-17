@@ -20,6 +20,8 @@ CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`�
 
 ## 完整示例
 
+### 1. 创建 workflow
+
 在你的任意一个 GitHub 仓库 `.github/workflows/` 文件夹下创建一个 `.yml` 文件，如 `cc.yml`，内容如下：
 
 ```yml
@@ -41,10 +43,6 @@ jobs:
           host: cordcloud.site
 ```
 
-同时，在 GitHub 仓库的 `Settings -> Secrets` 路径下配置好 `CC_EMAIL` 与 `CC_PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号密码等敏感信息。
-
-![](./images/add_secrets.png)
-
 注意：`cron` 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。由于 GitHub Actions 的限制，如果将 `cron` 表达式设置为 `* * * * *`，则实际的执行频率为每 5 分钟执行一次。
 
 ```bash
@@ -59,4 +57,16 @@ jobs:
 * * * * *
 ```
 
-实际上，你只需要跟示例一样，将 `cron` 表达式设置为每天运行一次即可。
+实际上，你只需要跟示例一样，将 `cron` 表达式设置为**每天定时运行一次**即可。
+
+### 2. 配置 secrets 参数
+
+在 GitHub 仓库的 `Settings -> Secrets` 路径下配置好 `CC_EMAIL` 与 `CC_PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号密码等敏感信息。
+
+![](./images/add_secrets.png)
+
+### 3. 每日运行结果
+
+若 CordCloud Action 所需参数 `email`、`passwd` 等配置准确无误，CordCloud Action 将会根据触发条件（比如 `schedule`）自动运行，结果如下：
+
+![](./images/result.png)
