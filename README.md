@@ -6,9 +6,11 @@ CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`�
 
 |  参数  |  描述  |  是否必传  |  默认值  |
 |---|---|---|---|
-| `username` | 你的 CordCloud 帐号 | 是 |  |
+| `email` | 你的 CordCloud 邮箱 | 是 |  |
 | `passwd` | 你的 CordCloud 密码 | 是 |  |
 | `host` | CordCloud 站点 | 否 | `cordcloud.biz` |
+
+注意：使用此 CordCloud Action 前，请关闭两步验证，即把验证设置为“不要求”。
 
 ## 完整示例
 
@@ -28,12 +30,12 @@ jobs:
     steps:
       - uses: yanglbme/cordcloud-action@main
         with:
-          username: ${{ secrets.USERNAME }}
-          passwd: ${{ secrets.PASSWD }}
+          email: ${{ secrets.CC_EMAIL }}
+          passwd: ${{ secrets.CC_PASSWD }}
           host: cordcloud.site
 ```
 
-同时，在项目的 `Settings -> Secrets` 路径下配置好 `USERNAME` 与 `PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号信息。
+同时，在项目的 `Settings -> Secrets` 路径下配置好 `CC_EMAIL` 与 `CC_PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号信息。
 
 注意：
 

@@ -2,11 +2,11 @@ name: 'CordCloud Action'
 description: 'GitHub Action for CordCloud'
 author: 'yanglbme'
 branding:
-  icon: 'arrow-right-circle'
+  icon: 'check-circle'
   color: 'gray-dark'
 inputs:
-  username:
-    description: 'your cordcloud username'
+  email:
+    description: 'your cordcloud email'
     required: true
   passwd:
     description: 'your cordcloud password'
@@ -14,7 +14,7 @@ inputs:
   host:
     description: 'base host'
     required: false
-    default: 'cordcloud.biz'
+    default: 'cordcloud.site'
 outputs:
   result:
     description: 'The result of api'

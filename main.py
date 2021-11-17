@@ -3,12 +3,12 @@ from actions_toolkit import core
 from app.action import Action
 
 if __name__ == '__main__':
-    username = core.get_input('username')
-    passwd = core.get_input('passwd')
-    host = core.get_input('host') or 'cordcloud.biz'
-    action = Action(username, passwd, host)
     try:
-        res = action.run()
-        core.info(f'CordCloud Action 运行成功，结果：{res}')
+        email = core.get_input('email', required=True)
+        passwd = core.get_input('passwd', required=True)
+        host = core.get_input('host') or 'cordcloud.site'
+        action = Action(email, passwd, host=host)
+        action.run()
+        core.info(f'CordCloud Action 成功结束运行！')
     except Exception as e:
-        core.set_failed(str(e))
+        core.error(f'{str(e)}')
