@@ -11,4 +11,4 @@ if __name__ == '__main__':
         action.run()
         core.info(f'CordCloud Action 成功结束运行！')
     except Exception as e:
-        core.error(f'{str(e)}')
+        core.set_failed(f'{str(e)}')
