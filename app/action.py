@@ -1,6 +1,8 @@
 import requests
 from actions_toolkit import core
 
+from app.util import now
+
 
 class Action:
     def __init__(self, email: str, passwd: str, code: str = '', host: str = 'cordcloud.site'):
@@ -31,10 +33,10 @@ class Action:
     def run(self):
         res = self.login()
         if res['ret'] != 1:
-            raise Exception(f'CordCloud 帐号登录异常，错误日志：{res}')
-        core.info(f'帐号登录成功，结果：{res}')
+            raise Exception(f'[{now()}] CordCloud 帐号登录异常，错误日志：{res}')
+        core.info(f'[{now()}] 帐号登录成功，结果：{res}')
 
         res = self.check_in()
         if res['ret'] != 1:
             raise Exception(f'CordCloud 帐号自动签到续命异常，错误日志：{res}')
-        core.info(f'帐号续命成功，结果：{res}')
+        core.info(f'[{now()}] 帐号续命成功，结果：{res}')
