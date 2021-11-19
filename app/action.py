@@ -15,28 +15,28 @@ class Action:
     def format_url(self, path) -> str:
         return f'https://{self.host}/{path}'
 
-    def login(self) -> dict:
+    def login(self):
         login_url = self.format_url('auth/login')
         form_data = {
             'email': self.email,
             'passwd': self.passwd,
             'code': self.code
         }
-        resp = self.session.post(login_url, data=form_data)
-        return resp.json()
-
-    def check_in(self) -> dict:
-        check_in_url = self.format_url('user/checkin')
-        resp = self.session.post(check_in_url)
-        return resp.json()
-
-    def run(self):
-        res = self.login()
+        res = self.session.post(login_url, data=form_data).json()
         if res['ret'] != 1:
             raise Exception(f'[{now()}] CordCloud 帐号登录异常，错误日志：{res}')
         core.info(f'[{now()}] 帐号登录成功，结果：{res}')
 
-        res = self.check_in()
+    def check_in(self):
+        check_in_url = self.format_url('user/checkin')
+        res = self.session.post(check_in_url).json()
         if res['ret'] != 1:
-            raise Exception(f'CordCloud 帐号自动签到续命异常，错误日志：{res}')
-        core.info(f'[{now()}] 帐号续命成功，结果：{res}')
+            raise Exception(f'[{now()}] CordCloud 帐号自动签到续命异常，错误日志：{res}')
+
+    def run(self):
+        core.info('欢迎使用 CordCloud Action ❤\n\n'
+                  '📕 入门指南: https://github.com/marketplace/actions/cordcloud-action\n'
+                  '📣 由 Yang Libin 维护: https://github.com/yanglbme\n')
+        self.login()
+        self.check_in()
+        core.info(f'[{now()}] CordCloud Action 成功结束运行！')
