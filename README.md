@@ -10,11 +10,11 @@ CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`�
 | -------- | ------------------- | -------- | ---------------- | -------------------------- |
 | `email`  | 你的 CordCloud 邮箱 | 是       |                  | `${{ secrets.CC_EMAIL }}`  |
 | `passwd` | 你的 CordCloud 密码 | 是       |                  | `${{ secrets.CC_PASSWD }}` |
-| `host`   | CordCloud 站点      | 否       | `cordcloud.site` | `cordcloud.site`           |
+| `host`   | CordCloud 站点      | 否       | `cordcloud.site` | `cordcloud.site`          |
 
 ![](./images/login.png)
 
-注意：使用此 CordCloud Action 前，请关闭两步验证，即把验证设置为“不要求”。
+注意：使用此 Action 前，请确保关闭两步验证，即把验证设置为“不要求”。
 
 ![](./images/no_2steps.png)
 
@@ -57,7 +57,7 @@ jobs:
 * * * * *
 ```
 
-实际上，你只需要跟示例一样，将 `cron` 表达式设置为**每天定时运行一次**即可。
+实际上，一般情况下，你只需要跟示例一样，将 `cron` 表达式设置为**每天定时运行一次**即可。如果担心 CordCloud 官网某次恰好发生故障而无法完成自动签到，可以将 `cron` 表达式设置为一天运行 2 次或者更多次。
 
 ### 2. 配置 secrets 参数
 
@@ -67,6 +67,6 @@ jobs:
 
 ### 3. 每日运行结果
 
-若 CordCloud Action 所需参数 `email`、`passwd` 等配置准确无误，CordCloud Action 将会根据触发条件（比如 `schedule`）自动运行，结果如下：
+若 CordCloud Action 所需参数 `email`、`passwd` 等配置无误，CordCloud Action 将会根据触发条件（比如 `schedule`）自动运行，结果如下：
 
 ![](./images/result.png)

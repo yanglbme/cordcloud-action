@@ -9,8 +9,9 @@ class Action:
         self.email = email
         self.passwd = passwd
         self.code = code
-        self.host = host.replace('https://', '').replace('http://', '')
+        self.host = host.replace('https://', '').replace('http://', '').strip()
         self.session = requests.session()
+        self.timeout = 6
 
     def format_url(self, path) -> str:
         return f'https://{self.host}/{path}'
@@ -22,14 +23,14 @@ class Action:
             'passwd': self.passwd,
             'code': self.code
         }
-        res = self.session.post(login_url, data=form_data).json()
+        res = self.session.post(login_url, data=form_data, timeout=self.timeout).json()
         if res['ret'] != 1:
             raise Exception(f'[{now()}] CordCloud 帐号登录异常，错误日志：{res}')
         core.info(f'[{now()}] 帐号登录成功，结果：{res}')
 
     def check_in(self):
         check_in_url = self.format_url('user/checkin')
-        res = self.session.post(check_in_url).json()
+        res = self.session.post(check_in_url, timeout=self.timeout).json()
         if res['ret'] != 1:
             raise Exception(f'[{now()}] CordCloud 帐号自动签到续命异常，错误日志：{res}')
 
