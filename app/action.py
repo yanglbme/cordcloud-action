@@ -33,11 +33,10 @@ class Action:
         res = self.session.post(check_in_url, timeout=self.timeout).json()
         if res['ret'] != 1:
             raise Exception(f'[{now()}] CordCloud 帐号自动签到续命异常，错误日志：{res}')
+        core.info(f'[{now()}] 帐号续命成功，结果：{res}')
 
     def run(self):
-        core.info('欢迎使用 CordCloud Action ❤\n\n'
-                  '📕 入门指南: https://github.com/marketplace/actions/cordcloud-action\n'
-                  '📣 由 Yang Libin 维护: https://github.com/yanglbme\n')
+        core.info(f'[{now()}] 当前尝试 host：{self.host}')
         self.login()
         self.check_in()
         core.info(f'[{now()}] CordCloud Action 成功结束运行！')

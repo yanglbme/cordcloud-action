@@ -14,7 +14,7 @@ inputs:
   host:
     description: 'base host'
     required: false
-    default: 'cordcloud.site'
+    default: 'cordcloud.site,cordcloud.one,cordcloud.biz,c-cloud.xyz'
 outputs:
   result:
     description: 'The result of api'

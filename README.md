@@ -6,11 +6,13 @@ CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`�
 
 ## 入参
 
-| 参数     | 描述                | 是否必传 | 默认值           | 示例                       |
-| -------- | ------------------- | -------- | ---------------- | -------------------------- |
-| `email`  | 你的 CordCloud 邮箱 | 是       |                  | `${{ secrets.CC_EMAIL }}`  |
-| `passwd` | 你的 CordCloud 密码 | 是       |                  | `${{ secrets.CC_PASSWD }}` |
-| `host`   | CordCloud 站点      | 否       | `cordcloud.site` | `cordcloud.site`          |
+| 参数     | 描述           | 是否必传 | 默认值                                                     | 示例                       |
+| -------- | -------------- | -------- | ---------------------------------------------------------- | -------------------------- |
+| `email`  | CordCloud 邮箱 | 是       |                                                            | ${{ secrets.CC_EMAIL }}    |
+| `passwd` | CordCloud 密码 | 是       |                                                            | ${{ secrets.CC_PASSWD }}   |
+| `host`   | CordCloud 站点 | 否       | cordcloud.site,cordcloud.one,<br>cordcloud.biz,c-cloud.xyz | cordcloud.site,c-cloud.xyz |
+
+注：`host` 支持以英文逗号分隔传入多个站点，CordCloud Action 会依次尝试每个站点，成功即停止。
 
 ![](./images/login.png)
 
@@ -40,7 +42,7 @@ jobs:
         with:
           email: ${{ secrets.CC_EMAIL }}
           passwd: ${{ secrets.CC_PASSWD }}
-          host: cordcloud.site
+          host: cordcloud.site,c-cloud.xyz
 ```
 
 注意：`cron` 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。由于 GitHub Actions 的限制，如果将 `cron` 表达式设置为 `* * * * *`，则实际的执行频率为每 5 分钟执行一次。
