@@ -6,11 +6,11 @@ CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`�
 
 ## 入参
 
-| 参数     | 描述           | 是否必传 | 默认值                                                     | 示例                       |
-| -------- | -------------- | -------- | ---------------------------------------------------------- | -------------------------- |
-| `email`  | CordCloud 邮箱 | 是       |                                                            | ${{ secrets.CC_EMAIL }}    |
-| `passwd` | CordCloud 密码 | 是       |                                                            | ${{ secrets.CC_PASSWD }}   |
-| `host`   | CordCloud 站点 | 否       | cordcloud.site,cordcloud.one,<br>cordcloud.biz,c-cloud.xyz | cordcloud.site,c-cloud.xyz |
+| 参数     | 描述           | 是否必传 | 默认值                                                     | 示例                     |
+| -------- | -------------- | -------- | ---------------------------------------------------------- | ------------------------ |
+| `email`  | CordCloud 邮箱 | 是       |                                                            | ${{ secrets.CC_EMAIL }}  |
+| `passwd` | CordCloud 密码 | 是       |                                                            | ${{ secrets.CC_PASSWD }} |
+| `host`   | CordCloud 站点 | 否       | cordcloud.site,cordcloud.one,<br>cordcloud.biz,c-cloud.xyz |                          |
 
 注：`host` 支持以英文逗号分隔传入多个站点，CordCloud Action 会依次尝试每个站点，成功即停止。
 
@@ -42,7 +42,6 @@ jobs:
         with:
           email: ${{ secrets.CC_EMAIL }}
           passwd: ${{ secrets.CC_PASSWD }}
-          host: cordcloud.site,c-cloud.xyz
 ```
 
 注意：`cron` 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。由于 GitHub Actions 的限制，如果将 `cron` 表达式设置为 `* * * * *`，则实际的执行频率为每 5 分钟执行一次。
@@ -71,21 +70,24 @@ jobs:
 
 若 CordCloud Action 所需参数 `email`、`passwd` 等配置无误，CordCloud Action 将会根据触发条件（比如 `schedule`）自动运行，结果如下：
 
-![](./images/result.png)
+![](./images/res.png)
 
 ```bash
 Run yanglbme/cordcloud-action@main
   with:
     email: ***
     passwd: ***
-    host: cordcloud.site
-/usr/bin/docker run --name e28490748446defd494bb78e842d635fe963ab_14b195 --label e28490 --workdir /github/workspace --rm -e INPUT_EMAIL -e INPUT_PASSWD -e INPUT_HOST -e HOME -e GITHUB_JOB -e GITHUB_REF -e GITHUB_SHA -e GITHUB_REPOSITORY -e GITHUB_REPOSITORY_OWNER -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RETENTION_DAYS -e GITHUB_RUN_ATTEMPT -e GITHUB_ACTOR -e GITHUB_WORKFLOW -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e GITHUB_EVENT_NAME -e GITHUB_SERVER_URL -e GITHUB_API_URL -e GITHUB_GRAPHQL_URL -e GITHUB_REF_NAME -e GITHUB_REF_PROTECTED -e GITHUB_REF_TYPE -e GITHUB_WORKSPACE -e GITHUB_ACTION -e GITHUB_EVENT_PATH -e GITHUB_ACTION_REPOSITORY -e GITHUB_ACTION_REF -e GITHUB_PATH -e GITHUB_ENV -e RUNNER_OS -e RUNNER_ARCH -e RUNNER_NAME -e RUNNER_TOOL_CACHE -e RUNNER_TEMP -e RUNNER_WORKSPACE -e ACTIONS_RUNTIME_URL -e ACTIONS_RUNTIME_TOKEN -e ACTIONS_CACHE_URL -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/reading/reading":"/github/workspace" e28490:748446defd494bb78e842d635fe963ab
+    host: cordcloud.site,cordcloud.biz,c-cloud.xyz
+/usr/bin/docker run --name e284907234b909e5834e1eada54639a7313ce5_05bbe4 --label e28490 --workdir /github/workspace --rm -e INPUT_EMAIL -e INPUT_PASSWD -e INPUT_HOST -e HOME -e GITHUB_JOB -e GITHUB_REF -e GITHUB_SHA -e GITHUB_REPOSITORY -e GITHUB_REPOSITORY_OWNER -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RETENTION_DAYS -e GITHUB_RUN_ATTEMPT -e GITHUB_ACTOR -e GITHUB_WORKFLOW -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e GITHUB_EVENT_NAME -e GITHUB_SERVER_URL -e GITHUB_API_URL -e GITHUB_GRAPHQL_URL -e GITHUB_REF_NAME -e GITHUB_REF_PROTECTED -e GITHUB_REF_TYPE -e GITHUB_WORKSPACE -e GITHUB_ACTION -e GITHUB_EVENT_PATH -e GITHUB_ACTION_REPOSITORY -e GITHUB_ACTION_REF -e GITHUB_PATH -e GITHUB_ENV -e RUNNER_OS -e RUNNER_ARCH -e RUNNER_NAME -e RUNNER_TOOL_CACHE -e RUNNER_TEMP -e RUNNER_WORKSPACE -e ACTIONS_RUNTIME_URL -e ACTIONS_RUNTIME_TOKEN -e ACTIONS_CACHE_URL -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/reading/reading":"/github/workspace" e28490:7234b909e5834e1eada54639a7313ce5
 欢迎使用 CordCloud Action ❤
 
 📕 入门指南: https://github.com/marketplace/actions/cordcloud-action
 📣 由 Yang Libin 维护: https://github.com/yanglbme
 
-[2021-11-22 08:29:30] 帐号登录成功，结果：{'ret': 1, 'msg': '欢迎回来'}
-[2021-11-22 08:29:30] 帐号续命成功，结果：{'msg': '获得了 281 MB流量.', 'ret': 1}
-[2021-11-22 08:29:30] CordCloud Action 成功结束运行！
+[2021-11-27 08:28:34] 当前尝试 host：cordcloud.site
+Warning: host：cordcloud.site, 错误信息：HTTPSConnectionPool(host='cordcloud.site', port=443): Max retries exceeded with url: /auth/login (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7ff7f990c4c0>, 'Connection to cordcloud.site timed out. (connect timeout=6)'))
+[2021-11-27 08:28:40] 当前尝试 host：cordcloud.biz
+[2021-11-27 08:28:41] 帐号登录成功，结果：{'ret': 1, 'msg': '欢迎回来'}
+[2021-11-27 08:28:41] 帐号续命成功，结果：{'msg': '获得了 275 MB流量.', 'ret': 1}
+[2021-11-27 08:28:41] CordCloud Action 成功结束运行！
 ```
