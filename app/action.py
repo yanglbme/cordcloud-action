@@ -5,7 +5,7 @@ from app.util import now
 
 
 class Action:
-    def __init__(self, email: str, passwd: str, code: str = '', host: str = 'cordcloud.site'):
+    def __init__(self, email: str, passwd: str, code: str = '', host: str = 'cordcloud.us'):
         self.email = email
         self.passwd = passwd
         self.code = code
@@ -23,7 +23,8 @@ class Action:
             'passwd': self.passwd,
             'code': self.code
         }
-        res = self.session.post(login_url, data=form_data, timeout=self.timeout).json()
+        res = self.session.post(login_url, data=form_data,
+                                timeout=self.timeout).json()
         if res['ret'] != 1:
             raise Exception(f'[{now()}] CordCloud 帐号登录异常，错误日志：{res}')
         core.info(f'[{now()}] 帐号登录成功，结果：{res}')

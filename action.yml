@@ -1,23 +1,23 @@
-name: 'CordCloud Action'
-description: 'GitHub Action for CordCloud'
-author: 'yanglbme'
+name: "CordCloud Action"
+description: "GitHub Action for CordCloud"
+author: "yanglbme"
 branding:
-  icon: 'check-circle'
-  color: 'gray-dark'
+  icon: "check-circle"
+  color: "gray-dark"
 inputs:
   email:
-    description: 'your cordcloud email'
+    description: "your cordcloud email"
     required: true
   passwd:
-    description: 'your cordcloud password'
+    description: "your cordcloud password"
     required: true
   host:
-    description: 'base host'
+    description: "base host"
     required: false
-    default: 'cordcloud.site,cordcloud.one,cordcloud.biz,c-cloud.xyz'
+    default: "cordcloud.us,cordcloud.one,cordcloud.biz,c-cloud.xyz"
 outputs:
   result:
-    description: 'The result of api'
+    description: "The result of api"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"

@@ -5,7 +5,7 @@ from app.action import Action
 # 获取输入
 email = core.get_input('email', required=True)
 passwd = core.get_input('passwd', required=True)
-host = core.get_input('host') or 'cordcloud.site,cordcloud.one,cordcloud.biz,c-cloud.xyz'
+host = core.get_input('host') or 'cordcloud.us,cordcloud.one,cordcloud.biz,c-cloud.xyz'
 
 # host 预处理：切分、过滤空值
 hosts = [h for h in host.split(',') if h]
