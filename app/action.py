@@ -1,7 +1,4 @@
 import requests
-from actions_toolkit import core
-
-from app.util import now
 
 
 class Action:
@@ -23,21 +20,13 @@ class Action:
             'passwd': self.passwd,
             'code': self.code
         }
-        res = self.session.post(login_url, data=form_data,
-                                timeout=self.timeout).json()
-        if res['ret'] != 1:
-            raise Exception(f'[{now()}] CordCloud 帐号登录异常，错误日志：{res}')
-        core.info(f'[{now()}] 帐号登录成功，结果：{res}')
+        return self.session.post(login_url, data=form_data,
+                                 timeout=self.timeout).json()
 
     def check_in(self):
         check_in_url = self.format_url('user/checkin')
-        res = self.session.post(check_in_url, timeout=self.timeout).json()
-        if res['ret'] != 1:
-            raise Exception(f'[{now()}] CordCloud 帐号自动签到续命异常，错误日志：{res}')
-        core.info(f'[{now()}] 帐号续命成功，结果：{res}')
+        return self.session.post(check_in_url, timeout=self.timeout).json()
 
     def run(self):
-        core.info(f'[{now()}] 当前尝试 host：{self.host}')
         self.login()
         self.check_in()
-        core.info(f'[{now()}] CordCloud Action 成功结束运行！')
