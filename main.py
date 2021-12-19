@@ -40,11 +40,11 @@ try:
         try:
             res = action.check_in()
         except Exception as check_in_err:
-            log.warning(f'CordCloud 账号自动续命异常，错误信息：{check_in_err}')
+            log.warning(f'CordCloud 帐号自动续命异常，错误信息：{check_in_err}')
             continue
 
         if '您似乎已经签到过' in res['msg']:
-            log.warning('当前帐号已经签到过')
+            log.warning('帐号已经完成今日签到了，不必重复签到')
         elif res['ret'] != 1:
             raise Exception(f'CordCloud 帐号续命失败，错误信息：{res}')
         else:

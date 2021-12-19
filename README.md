@@ -12,7 +12,7 @@ CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`�
 | `passwd` | CordCloud 密码 | 是       |                                                          | ${{ secrets.CC_PASSWD }} |
 | `host`   | CordCloud 站点 | 否       | cordcloud.us,cordcloud.one,<br>cordcloud.biz,c-cloud.xyz |                          |
 
-注：`host` 支持以英文逗号分隔传入多个站点，CordCloud Action 会依次尝试每个站点，成功即停止。
+注：`host` 支持以英文逗号分隔传入多个站点，CordCloud Action 会依次尝试每个站点，成功即停止。若是遇到帐号或密码错误，则不会继续尝试剩余站点。
 
 ![](./images/login.png)
 
