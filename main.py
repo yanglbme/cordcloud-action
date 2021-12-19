@@ -1,16 +1,19 @@
+from string import Template
+
 from actions_toolkit import core
 
 from app import log
 from app.action import Action
 
-author = {
-    'name': 'Yang Libin',
-    'link': 'https://github.com/yanglbme'
+action = {
+    'action': 'CordCloud Action',
+    'author': 'Yang Libin',
+    'github': 'https://github.com/yanglbme',
+    'marketplace': 'https://github.com/marketplace/actions/cordcloud-action'
 }
-marketplace = 'https://github.com/marketplace/actions/cordcloud-action'
 
-log.info(f'欢迎使用 CordCloud Action ❤\n\n📕 入门指南: {marketplace}\n'
-         f'📣 由 {author["name"]} 维护: {author["link"]}\n')
+welcome = Template('欢迎使用 $action ❤\n\n📕 入门指南: $marketplace\n📣 由 $author 维护: $github\n')
+log.info(welcome.substitute(action))
 
 try:
     # 获取输入
@@ -24,33 +27,29 @@ try:
     for i, h in enumerate(hosts):
         # 依次尝试每个 host
         log.info(f'当前尝试 host：{h}')
-
         action = Action(email, passwd, host=h)
-
         try:
+            # 登录
             res = action.login()
-        except Exception as login_err:
-            log.warning(f'CordCloud 帐号登录异常，错误信息：{login_err}')
-            continue
+            if res['ret'] != 1:
+                log.set_failed(f'CordCloud 帐号登录失败，错误信息：{res}')
+            log.info(f'尝试帐号登录，结果：{res}')
 
-        if res['ret'] != 1:
-            raise Exception(f'CordCloud 帐号登录失败，错误信息：{res}')
-        log.info(f'尝试帐号登录，结果：{res}')
-
-        try:
+            # 签到
             res = action.check_in()
-        except Exception as check_in_err:
-            log.warning(f'CordCloud 帐号自动续命异常，错误信息：{check_in_err}')
-            continue
+            if res['ret'] != 1 and '您似乎已经签到过' not in res['msg']:
+                log.set_failed(f'CordCloud 帐号续命失败，错误信息：{res}')
+            msg = '今日签到已完成，不必重复签到' if '您似乎已经签到过' in res['msg'] else f'尝试帐号续命，结果：{res}'
+            log.info(msg)
 
-        if '您似乎已经签到过' in res['msg']:
-            log.warning('帐号已经完成今日签到了，不必重复签到')
-        elif res['ret'] != 1:
-            raise Exception(f'CordCloud 帐号续命失败，错误信息：{res}')
-        else:
-            log.info(f'尝试帐号续命，结果：{res}')
-
-        log.info(f'CordCloud Action 成功结束运行！')
-        break
+            # 成功运行，退出循环
+            log.info(f'CordCloud Action 成功结束运行！')
+            break
+        except Exception as e:
+            # 失败，尝试下一个 host
+            log.warning(f'CordCloud Action 运行异常，错误信息：{str(e)}')
+    else:
+        # 尝试了所有 hosts，都失败
+        log.set_failed(f'CordCloud Action 运行失败！')
 except Exception as e:
-    core.set_failed(str(e))
+    log.set_failed(str(e))

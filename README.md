@@ -4,6 +4,8 @@
 
 CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`，实现每日自动签到，领取流量续命。
 
+欢迎 Star ⭐ 关注[本项目](https://github.com/yanglbme/cordcloud-action)，若有体验上的问题，欢迎提交 issues 反馈给我。你也可以将本项目 Fork 到你的个人帐号下，进行自定义扩展。
+
 ## 入参
 
 | 参数     | 描述           | 是否必传 | 默认值                                                   | 示例                     |
