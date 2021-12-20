@@ -42,6 +42,12 @@ try:
             msg = '今日签到已完成，不必重复签到' if '您似乎已经签到过' in res['msg'] else f'尝试帐号续命，结果：{res}'
             log.info(msg)
 
+            # 获取流量使用情况
+            account = action.info()
+            if account:
+                today_used, total_used, rest = account
+                log.info(f'今日已用：{today_used}, 过去已用：{total_used}, 剩余流量：{rest}')
+
             # 成功运行，退出循环
             log.info(f'CordCloud Action 成功结束运行！')
             break

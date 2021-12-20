@@ -1,3 +1,6 @@
+import re
+from typing import Tuple
+
 import requests
 
 
@@ -13,7 +16,7 @@ class Action:
     def format_url(self, path) -> str:
         return f'https://{self.host}/{path}'
 
-    def login(self):
+    def login(self) -> dict:
         login_url = self.format_url('auth/login')
         form_data = {
             'email': self.email,
@@ -23,10 +26,27 @@ class Action:
         return self.session.post(login_url, data=form_data,
                                  timeout=self.timeout).json()
 
-    def check_in(self):
+    def check_in(self) -> dict:
         check_in_url = self.format_url('user/checkin')
         return self.session.post(check_in_url, timeout=self.timeout).json()
+
+    def info(self) -> Tuple:
+        user_url = self.format_url('user')
+        html = self.session.get(user_url).text
+        today_used = re.search('<span class="traffic-info">今日已用</span>(.*?)<code class="card-tag tag-red">(.*?)</code>',
+                               html,
+                               re.S)
+        total_used = re.search(
+            '<span class="traffic-info">过去已用</span>(.*?)<code class="card-tag tag-orange">(.*?)</code>',
+            html, re.S)
+        rest = re.search(
+            '<span class="traffic-info">剩余流量</span>(.*?)<code class="card-tag tag-green" id="remain">(.*?)</code>',
+            html, re.S)
+        if today_used and total_used and rest:
+            return today_used.group(2), total_used.group(2), rest.group(2)
+        return ()
 
     def run(self):
         self.login()
         self.check_in()
+        self.info()
