@@ -32,21 +32,28 @@ try:
             # 登录
             res = action.login()
             if res['ret'] != 1:
-                log.set_failed(f'CordCloud 帐号登录失败，错误信息：{res}')
-            log.info(f'尝试帐号登录，结果：{res}')
+                log.set_failed(f'CordCloud 帐号登录失败，错误信息：{res["msg"]}')
+            log.info(f'尝试帐号登录，结果：{res["msg"]}')
 
             # 签到
             res = action.check_in()
             if res['ret'] != 1 and '您似乎已经签到过' not in res['msg']:
-                log.set_failed(f'CordCloud 帐号续命失败，错误信息：{res}')
-            msg = '今日签到已完成，不必重复签到' if '您似乎已经签到过' in res['msg'] else f'尝试帐号续命，结果：{res}'
-            log.info(msg)
-
-            # 获取流量使用情况
-            account = action.info()
-            if account:
-                today_used, total_used, rest = account
-                log.info(f'今日已用：{today_used}, 过去已用：{total_used}, 剩余流量：{rest}')
+                log.set_failed(f'CordCloud 帐号续命失败，错误信息：{res["msg"]}')
+            log.info(f'尝试帐号签到，结果：{res["msg"]}')
+            if 'trafficInfo' not in res:
+                account = action.info()
+                if account:
+                    today_used, last_used, unused = account
+                    info = {
+                        'todayUsedTraffic': today_used,
+                        'lastUsedTraffic': last_used,
+                        'unUsedTraffic': unused
+                    }
+                    res['trafficInfo'] = info
+            if 'trafficInfo' in res:
+                e = res['trafficInfo']
+                log.info(
+                    f'帐号流量使用情况：今日已用 {e["todayUsedTraffic"]}, 过去已用 {e["lastUsedTraffic"]}, 剩余流量 {e["unUsedTraffic"]}')
 
             # 成功运行，退出循环
             log.info(f'CordCloud Action 成功结束运行！')
