@@ -2,6 +2,9 @@ import re
 from typing import Tuple
 
 import requests
+import urllib3
+
+urllib3.disable_warnings()
 
 
 class Action:
@@ -24,15 +27,15 @@ class Action:
             'code': self.code
         }
         return self.session.post(login_url, data=form_data,
-                                 timeout=self.timeout).json()
+                                 timeout=self.timeout, verify=False).json()
 
     def check_in(self) -> dict:
         check_in_url = self.format_url('user/checkin')
-        return self.session.post(check_in_url, timeout=self.timeout).json()
+        return self.session.post(check_in_url, timeout=self.timeout, verify=False).json()
 
     def info(self) -> Tuple:
         user_url = self.format_url('user')
-        html = self.session.get(user_url).text
+        html = self.session.get(user_url, verify=False).text
         today_used = re.search('<span class="traffic-info">今日已用</span>(.*?)<code class="card-tag tag-red">(.*?)</code>',
                                html,
                                re.S)
