@@ -1,6 +1,6 @@
 # CordCloud Action
 
-<a href="https://github.com/yanglbme/cordcloud-action/actions"><img src="https://img.shields.io/github/workflow/status/yanglbme/cordcloud-action/Sync?color=42b883&label=sync&style=flat-square" alt="lint"></a> <a href="./LICENSE"><img src="https://img.shields.io/github/license/yanglbme/cordcloud-action?color=42b883&style=flat-square" alt="license"></a> <a href="../../releases"><img src="https://img.shields.io/github/v/release/yanglbme/cordcloud-action?color=42b883&style=flat-square" alt="release"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/github/license/yanglbme/cordcloud-action?color=42b883&style=flat-square" alt="license"></a> <a href="../../releases"><img src="https://img.shields.io/github/v/release/yanglbme/cordcloud-action?color=42b883&style=flat-square" alt="release"></a>
 
 CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`，实现每日自动签到，领取流量续命。
 
