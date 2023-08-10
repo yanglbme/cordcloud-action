@@ -105,18 +105,17 @@ Run yanglbme/cordcloud-action@main
   with:
     email: ***
     passwd: ***
-    host: cordcloud.site,cordcloud.biz,c-cloud.xyz
-/usr/bin/docker run --name a682566e9478b34b64d59beaa34d7c1661b64_0fbc18 --label 6a6825 --workdir /github/workspace --rm -e INPUT_EMAIL -e INPUT_PASSWD -e INPUT_HOST -e HOME -e GITHUB_JOB -e GITHUB_REF -e GITHUB_SHA -e GITHUB_REPOSITORY -e GITHUB_REPOSITORY_OWNER -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RETENTION_DAYS -e GITHUB_RUN_ATTEMPT -e GITHUB_ACTOR -e GITHUB_WORKFLOW -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e GITHUB_EVENT_NAME -e GITHUB_SERVER_URL -e GITHUB_API_URL -e GITHUB_GRAPHQL_URL -e GITHUB_REF_NAME -e GITHUB_REF_PROTECTED -e GITHUB_REF_TYPE -e GITHUB_WORKSPACE -e GITHUB_ACTION -e GITHUB_EVENT_PATH -e GITHUB_ACTION_REPOSITORY -e GITHUB_ACTION_REF -e GITHUB_PATH -e GITHUB_ENV -e RUNNER_OS -e RUNNER_ARCH -e RUNNER_NAME -e RUNNER_TOOL_CACHE -e RUNNER_TEMP -e RUNNER_WORKSPACE -e ACTIONS_RUNTIME_URL -e ACTIONS_RUNTIME_TOKEN -e ACTIONS_CACHE_URL -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/reading/reading":"/github/workspace" 6a6825:66e9478b34b64d59beaa34d7c1661b64
-[2021-12-22 08:32:53] 欢迎使用 CordCloud Action ❤
+    secret: ***
+    host: cordcloud.us,cordcloud.one,cordcloud.biz,c-cloud.xyz
+/usr/bin/docker run --name bedb45d362fa3d3b44c97b19a4a9aff834955_0c4091 --label 5bedb4 --workdir /github/workspace --rm -e "INPUT_EMAIL" -e "INPUT_PASSWD" -e "INPUT_SECRET" -e "INPUT_HOST" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/reading/reading":"/github/workspace" 5bedb4:5d362fa3d3b44c97b19a4a9aff834955
+[2023-08-10 10:20:33] 欢迎使用 CordCloud Action ❤
 
 📕 入门指南: https://github.com/marketplace/actions/cordcloud-action
 📣 由 Yang Libin 维护: https://github.com/yanglbme
 
-[2021-12-22 08:32:53] 当前尝试 host：cordcloud.site
-Warning: [2021-12-22 08:32:59] CordCloud Action 运行异常，错误信息：HTTPSConnectionPool(host='cordcloud.site', port=443): Max retries exceeded with url: /auth/login (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f50fed443d0>, 'Connection to cordcloud.site timed out. (connect timeout=6)'))
-[2021-12-22 08:32:59] 当前尝试 host：cordcloud.biz
-[2021-12-22 08:33:00] 尝试帐号登录，结果：登录成功
-[2021-12-22 08:33:00] 尝试帐号签到，结果：获得了 328MB 流量.
-[2021-12-22 08:33:00] 帐号流量使用情况：今日已用 140.45MB, 过去已用 17.2GB, 剩余流量 341.08GB
-[2021-12-22 08:33:00] CordCloud Action 成功结束运行！
+[2023-08-10 10:20:33] 当前尝试 host：cordcloud.us
+[2023-08-10 10:20:33] 尝试帐号登录，结果：登录成功
+[2023-08-10 10:20:33] 尝试帐号签到，结果：您似乎已经签到过了...
+[2023-08-10 10:20:34] 帐号流量使用情况：今日已用 121.22MB, 过去已用 162.02GB, 剩余流量 688.62GB
+[2023-08-10 10:20:34] CordCloud Action 成功结束运行！
 ```
