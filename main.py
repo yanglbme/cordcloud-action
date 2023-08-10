@@ -1,5 +1,6 @@
 from string import Template
 
+import pyotp
 from actions_toolkit import core
 
 from app import log
@@ -19,7 +20,9 @@ try:
     # 获取输入
     email = core.get_input('email', required=True)
     passwd = core.get_input('passwd', required=True)
+    secret = core.get_input('secret')
     host = core.get_input('host') or 'cordcloud.us,cordcloud.one,cordcloud.biz,c-cloud.xyz'
+    code = pyotp.TOTP(secret).now() if secret else ''
 
     # host 预处理：切分、过滤空值
     hosts = [h for h in host.split(',') if h]
@@ -27,7 +30,7 @@ try:
     for i, h in enumerate(hosts):
         # 依次尝试每个 host
         log.info(f'当前尝试 host：{h}')
-        action = Action(email, passwd, host=h)
+        action = Action(email, passwd, code=code, host=h)
         try:
             # 登录
             res = action.login()

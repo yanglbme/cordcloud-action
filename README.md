@@ -4,23 +4,26 @@
 
 CordCloud 帐号自动续命。可配置 workflow 的触发条件为 `schedule`，实现每日自动签到，领取流量续命。
 
-欢迎 Star ⭐ 关注[本项目](https://github.com/yanglbme/cordcloud-action)，若有体验上的问题，欢迎提交 issues 反馈给我。你也可以将本项目 Fork 到你的个人帐号下，进行自定义扩展。
+欢迎 Star ⭐ 关注[本项目](https://github.com/yanglbme/cordcloud-action)，若有体验上的问题，欢迎提交 issues 反馈给我。你也可以将本项目 Fork
+到你的个人帐号下，进行自定义扩展。
 
 ## 入参
 
-| 参数     | 描述           | 是否必传 | 默认值                                                   | 示例                     |
-| -------- | -------------- | -------- | -------------------------------------------------------- | ------------------------ |
-| `email`  | CordCloud 邮箱 | 是       |                                                          | ${{ secrets.CC_EMAIL }}  |
-| `passwd` | CordCloud 密码 | 是       |                                                          | ${{ secrets.CC_PASSWD }} |
-| `host`   | CordCloud 站点 | 否       | cordcloud.us,cordcloud.one,<br>cordcloud.biz,c-cloud.xyz |                          |
+| 参数     | 描述                   | 是否必传 | 默认值                                                   | 示例                      |
+| -------- | ---------------------- | -------- | -------------------------------------------------------- | ------------------------- |
+| `email`  | CordCloud 邮箱         | 是       |                                                          | \${{ secrets.CC_EMAIL }}  |
+| `passwd` | CordCloud 密码         | 是       |                                                          | \${{ secrets.CC_PASSWD }} |
+| `secret` | CordCloud 两步验证密钥 | 否       |                                                          | \${{ secrets.CC_SECRET }} |
+| `host`   | CordCloud 站点         | 否       | cordcloud.us,cordcloud.one,<br>cordcloud.biz,c-cloud.xyz |                           |
 
-注：`host` 支持以英文逗号分隔传入多个站点，CordCloud Action 会依次尝试每个站点，成功即停止。若是遇到帐号或密码错误，则不会继续尝试剩余站点。
+注：
+
+- `host` 支持以英文逗号分隔传入多个站点，CordCloud Action 会依次尝试每个站点，成功即停止。若是遇到帐号或密码错误，则不会继续尝试剩余站点。
+- 如果你设置了两步验证，需要将两步验证的密钥传入，否则无法正常签到。
 
 ![](./images/login.png)
 
-注意：使用此 Action 前，请确保关闭两步验证，即把验证设置为“不要求”。
-
-![](./images/no_2steps.png)
+![](./images/2step_secret.png)
 
 ## 完整示例
 
@@ -46,6 +49,27 @@ jobs:
           passwd: ${{ secrets.CC_PASSWD }}
 ```
 
+如果你设置了两步验证，需要将两步验证的密钥传入，否则无法完成登录签到。示例如下：
+
+```yml
+name: CordCloud
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  checkin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: yanglbme/cordcloud-action@main
+        with:
+          email: ${{ secrets.CC_EMAIL }}
+          passwd: ${{ secrets.CC_PASSWD }}
+          secret: ${{ secrets.CC_SECRET }}
+```
+
 注意：`cron` 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。由于 GitHub Actions 的限制，如果将 `cron` 表达式设置为 `* * * * *`，则实际的执行频率为每 5 分钟执行一次。
 
 ```bash
@@ -64,7 +88,9 @@ jobs:
 
 ### 2. 配置 secrets 参数
 
-在 GitHub 仓库的 `Settings -> Secrets` 路径下配置好 `CC_EMAIL` 与 `CC_PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号密码等敏感信息。
+在 GitHub 仓库的 `Settings -> Secrets` 路径下配置好 `CC_EMAIL` 与 `CC_PASSWD` ，不要直接在 `.yml` 文件中暴露个人帐号密码以及密钥等敏感信息。
+
+如果你设置了两步验证，注意还需要配置 `CC_SECRET` 参数。
 
 ![](./images/add_secrets.png)
 

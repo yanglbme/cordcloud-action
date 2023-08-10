@@ -11,6 +11,9 @@ inputs:
   passwd:
     description: "your cordcloud password"
     required: true
+  secret:
+    description: "your 2 step secret"
+    required: false
   host:
     description: "base host"
     required: false
