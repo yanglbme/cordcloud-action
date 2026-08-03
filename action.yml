@@ -1,26 +1,52 @@
 name: "CordCloud Action"
-description: "GitHub Action for CordCloud"
+description: "用于 CordCloud 的 GitHub Action"
 author: "yanglbme"
 branding:
   icon: "check-circle"
   color: "gray-dark"
 inputs:
   email:
-    description: "your cordcloud email"
+    description: "你的 CordCloud 邮箱"
     required: true
   passwd:
-    description: "your cordcloud password"
+    description: "你的 CordCloud 密码"
     required: true
   secret:
-    description: "your 2 step secret"
+    description: "你的两步验证密钥"
     required: false
+  device_code:
+    description: "陌生设备邮箱验证码（仅首次触发时需填一次，验证成功后设备指纹永不过期）"
+    required: false
+  device_token:
+    description: "首次触发时日志输出的验证 token（与 device_code 一起填写，避免重发验证码作废旧码）"
+    required: false
+  device_fingerprint:
+    description: "自定义稳定设备指纹（可复用已验证过的值）"
+    required: false
+  imap_host:
+    description: "用于自动读取验证码的 IMAP 服务器（留空则按邮箱域名自动识别）"
+    required: false
+  imap_port:
+    description: "IMAP 端口（默认 993）"
+    required: false
+    default: "993"
+  imap_user:
+    description: "IMAP 用户名（默认使用邮箱）"
+    required: false
+  imap_password:
+    description: "IMAP 密码/应用专用密码（用于自动从邮箱读取验证码）"
+    required: false
+  imap_timeout:
+    description: "IMAP 自动读取验证码的超时时间（秒，默认 120）"
+    required: false
+    default: "120"
   host:
-    description: "base host"
+    description: "CordCloud 站点"
     required: false
-    default: "cordcloud.us,cordcloud.one,cordcloud.biz,c-cloud.xyz"
+    default: "cordcloud.us,cordcloud.one,cordcloud.biz,c-cloud.xyz,cordc.xyz"
 outputs:
   result:
-    description: "The result of api"
+    description: "API 的返回结果"
 runs:
   using: "docker"
   image: "Dockerfile"

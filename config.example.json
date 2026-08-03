@@ -1,0 +1,14 @@
+{
+  "email": "your@email.com",
+  "passwd": "your_password",
+  "secret": "",
+  "host": "cordcloud.us,cordcloud.one,cordcloud.biz,c-cloud.xyz,cordc.xyz",
+  "device_code": "",
+  "device_token": "",
+  "device_fingerprint": "",
+  "imap_host": "",
+  "imap_port": 993,
+  "imap_user": "",
+  "imap_password": "",
+  "imap_timeout": 120
+}

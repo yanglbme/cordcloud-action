@@ -55,6 +55,12 @@ coverage.xml
 *.mo
 *.pot
 
+# 本地配置文件（含敏感信息，勿提交）
+config.*.json
+config.json
+!config.example.json
+.cordcloud_device_token
+
 # Django stuff:
 *.log
 local_settings.py
@@ -103,6 +109,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.*
 .venv
 env/
 venv/

@@ -1,6 +1,12 @@
+import sys
 from datetime import timedelta, timezone, datetime
 
 from actions_toolkit import core
+
+# 本地 Windows 控制台默认 GBK 编码，无法输出 emoji 等字符，强制使用 UTF-8 输出
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
 
 def now():
